@@ -1,9 +1,14 @@
-import React, { useRef, useState } from 'react';
-import { Alert, View, ActivityIndicator, StyleSheet } from 'react-native';
-import { WebView } from 'react-native-webview';
+import React, {useRef, useState} from 'react';
+import {Alert, View, ActivityIndicator, StyleSheet} from 'react-native';
+import {WebView} from 'react-native-webview';
 import Orientation from 'react-native-orientation-locker';
 
-export default function player(props: { htmlPlayer: any, videoURL: string, thumbnailURL: string, videoSeekTime: number }): React.JSX.Element {
+export default function player(props: {
+  htmlPlayer: any;
+  videoURL: string;
+  thumbnailURL: string;
+  videoSeekTime: number;
+}): React.JSX.Element {
   const webViewRef = useRef(null);
   const [showSpinner, setShowSpinner] = useState(false);
   const showAlert = (msg: string) =>
@@ -43,14 +48,14 @@ export default function player(props: { htmlPlayer: any, videoURL: string, thumb
     let dataPayload;
     try {
       dataPayload = JSON.parse(payload.nativeEvent.data);
-    } catch (e) { }
+    } catch (e) {}
 
     if (dataPayload) {
       if (dataPayload.type === 'Console') {
         let consoleMsg = dataPayload.data.log.split('|');
         console.log(consoleMsg);
         if (consoleMsg[0] === 'SLIDER') {
-          //showAlert('You can not move forward');
+          showAlert('You can not move forward');
         } else if (consoleMsg[0] === 'FullScreenOut') {
           console.log('Lock Orientation to Potrait');
           Orientation.lockToPortrait();
@@ -75,7 +80,7 @@ export default function player(props: { htmlPlayer: any, videoURL: string, thumb
   return (
     <>
       <WebView
-        style={{ flex: 1 }}
+        style={{flex: 1}}
         javaScriptEnabled={true}
         scrollEnabled={false}
         allowsFullscreenVideo={true}
