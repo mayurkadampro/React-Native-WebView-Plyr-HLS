@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>HLS Demo</title>
+  <link rel="stylesheet" href="https://cdn.plyr.io/1.8.2/plyr.css" />
+  <script src="https://cdn.plyr.io/1.8.2/plyr.js"></script>
+  <style>
+    body {
+      margin: 0px;
+    }
+
+    .plyr {
+      height: 100%;
+      width: 100%;
+    }
+
+    video::-webkit-media-controls {
+      opacity: 0.01 !important;
+    }
+  </style>
+</head>
+
+<body>
+  <video preload="metadata" id="player" controls crossorigin
+    src="" width="1080" height="780"></video>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      let video = document.querySelector('#player');
+      let counter = 0;
+
+      plyr.setup(video);
+      window.player = video;
+
+      video.addEventListener('timeupdate', function (event) {
+        counter = event.target.currentTime;
+      });
+
+      video.addEventListener('pause', function (event) {
+        console.log('PAUSE|' + event.target.currentTime);
+      });
+
+      video.addEventListener('play', function (event) {
+        console.log('PLAY|' + event.target.currentTime);
+      });
+
+      video.addEventListener('seeking', function (event) {
+        if (parseInt(counter, 10) != parseInt(event.target.currentTime, 10)) {
+          // event.target.currentTime = counter;
+          console.log('SLIDER|' + event.target.currentTime);
+        }
+      });
+
+      video.addEventListener('ended', function (event) {
+        counter = 0;
+        console.log('ENDED|' + event.target.currentTime);
+      });
+
+      ['', 'webkit', 'moz', 'ms'].forEach(prefix =>
+        document.addEventListener(prefix + 'fullscreenchange', check, false),
+      );
+
+      function check() {
+        if (document.fullscreenElement) {
+          console.log('FullScreenIn|FullScreenIn');
+        } else {
+          console.log('FullScreenOut|FullScreenOut');
+        }
+      }
+    });
+  </script>
+</body>
+
+</html>
