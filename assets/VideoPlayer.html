@@ -43,19 +43,25 @@
 
       video.addEventListener('play', function (event) {
         console.log('PLAY|' + event.target.currentTime);
+      });
 
-        // Event added inside play so we can start video from seekTime
-        // debounce logic added, so whenever use drag it continually it should not trigger any alert.
-        let timer;
-        video.addEventListener('seeking', function (event) {
-          clearTimeout(timer);
-          timer = setTimeout(() => {
-            if (parseInt(counter, 10) < parseInt(event.target.currentTime, 10)) {
-              event.target.currentTime = counter;
-              console.log('SLIDER|' + event.target.currentTime);
-            }
-          }, 1000);
-        });
+      // Here seeking event added inside loadedmetadata so it should not block video to start with specific seek time
+      video.addEventListener('loadedmetadata', function (event) {
+        setTimeout(() => {
+          // debounce logic added, so whenever use drag it continually it should not trigger any alert.
+          let timer;
+          video.addEventListener('seeking', function (event) {
+            clearTimeout(timer);
+            timer = setTimeout(() => {
+              if (
+                parseInt(counter, 10) < parseInt(event.target.currentTime, 10)
+              ) {
+                event.target.currentTime = counter;
+                console.log('SLIDER|' + event.target.currentTime);
+              }
+            }, 1000);
+          });
+        }, 2000);
       });
 
       video.addEventListener('ended', function (event) {
