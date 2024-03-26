@@ -9,21 +9,27 @@
   <style>
     body {
       margin: 0px;
-    }
-
-    .plyr {
-      height: 100%;
-      width: 100%;
+      padding: 0px;
+      box-sizing: 'border-box';
     }
 
     video::-webkit-media-controls {
       opacity: 0.01 !important;
     }
+
+    .plyr audio,
+    .plyr video {
+      height: 260px;
+      min-height: 100%;
+      min-width: 100%;
+      object-fit: fill;
+    }
   </style>
 </head>
 
 <body>
-  <video preload="metadata" id="player" controls crossorigin src="" width="1080" height="780"></video>
+  <video class="video-js vjs-default-skin videoContainer" preload="metadata" id="player" controls crossorigin
+    src=""></video>
 
   <script>
     document.addEventListener('DOMContentLoaded', () => {
