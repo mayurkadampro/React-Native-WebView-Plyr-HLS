@@ -1,4 +1,8 @@
-This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
+# Snapshot
+
+| Main view on pause | Main view on play | landscape mode
+|:-:|:-:|:-:|
+| ![First](https://github.com/mayurkadampro/React-Native-WebView-Plyr-HLS/blob/master/Snapshots/screen%201.png) | ![Second](https://github.com/mayurkadampro/React-Native-WebView-Plyr-HLS/blob/master/Snapshots/screen%202.png) | ![Third](https://github.com/mayurkadampro/React-Native-WebView-Plyr-HLS/blob/master/Snapshots/screen%203.png)
 
 # Getting Started
 
